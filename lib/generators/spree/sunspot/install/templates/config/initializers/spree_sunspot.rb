@@ -6,6 +6,7 @@ Spree::Sunspot::Setup.configure do
     text :name, :boost => 2.0
     text :description, :boost => 1.2
     time :available_on
+    string(:sku, :stored => true, :multiple => true) { variants.map(&:sku) }
     integer :taxon_ids, :references => Spree::Taxon, :multiple => true do
       taxons.collect{|t| t.self_and_ancestors.map(&:id) }.flatten
     end
